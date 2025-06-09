@@ -1,9 +1,11 @@
 # Entrada do usuário
-email = input().strip()
+email = input("Informe seu email: ")
 
 # TODO: Verifique as regras do e-mail:
-def valid_email():
-    if '@' and ' ' in email:
-        return("E-mail válido")
+def valid_email(email):
+    if '@' in email:
+        print("E-mail válido")
     else:
-        return("E-mail inválido")
+        print("E-mail inválido")
+    
+
