@@ -5,14 +5,17 @@ eventos = {}
 n = int(input().strip())
 
 # TODO: Crie um loop para armazenar participantes e seus temas:
-for i in range(n):
-    linha = input().strip()
+for _ in range(n):
+    linha = input().strip()    
     participantes, tema = linha.rsplit(' ', 1)
-
-    if tema not in eventos:
-        eventos[tema] = []
+    participantes = participantes.strip().replace(",", "")
+    tema = tema.strip()
+        
+    if participantes:
+        if tema not in eventos:
+            eventos[tema] = []
         eventos[tema].append(participantes)
-
+        
 # Exibe os grupos organizados
 for tema, participantes in eventos.items():
-    print(f"{tema}: {', '.join(participantes)}")
+    print(f"{tema}: {' '.join(participantes)}")
