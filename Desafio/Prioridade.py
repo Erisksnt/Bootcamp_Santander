@@ -26,12 +26,18 @@ class Paciente:
 
     def prioridade(self):
         if self.idade >= 60:
+            self.status = 'Urgente'
             return 2
-    
         elif self.idade >= 30 and self.idade <= 59:
+            self.status = 'Normal'
             return 1
         else:
+            self.status = 'Não precisa de Prioridade'
             return 0
     
 # TODO: Exiba a ordem de atendimento com título e vírgulas:
-list_pacient("Zen of Python", "Beautiful is better than ugly.", autor="Tim Peters", ano=1999)
+ordem_prioridade = sorted(pacientes, key=lambda p: (-Paciente(*p).prioridade(), p[0]))
+paciente_prioridade = (f"{nome}", for nome in ordem_prioridade)
+exibir(f"Ordem de atendimento {ordem_prioridade}")
+
+
