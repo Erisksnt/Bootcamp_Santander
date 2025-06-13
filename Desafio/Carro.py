@@ -2,8 +2,7 @@ from datetime import datetime
 
 # TODO: Crie a Classe Veiculo e armazene sua marca, modelo e ano como atributos:
 class Veiculo:
-    def __init__(self, nome, marca, modelo, ano):
-        self.nome = nome
+    def __init__(self, marca, modelo, ano):
         self.marca = marca
         self.modelo = modelo
         self.ano = ano
@@ -13,9 +12,9 @@ class Veiculo:
         ano_atual = datetime.now().year
         idade_veiculo = ano_atual - self.ano 
         if idade_veiculo <= 20:
-            print("Veículo novo")
+            return "Veículo novo"
         else:
-            print("Veículo antigo")
+            return "Veículo antigo"
 
 # Entrada direta
 marca = input().strip()
