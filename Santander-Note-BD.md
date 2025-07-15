@@ -1,147 +1,172 @@
-﻿# 🐍 Anotações de Python - Conceitos Avançados
+﻿# 🗃️ Banco de Dados - Conceitos Fundamentais
 
-## Funções como objetos de primeira classe
-- Em Python, funções são objetos de primeira classe.
-- Isso significa que podem ser:
-  - Atribuídas a variáveis
-  - Passadas como argumentos
-  - Retornadas por outras funções
-- Exemplo:
-  ```python
-  def do_something(name):
-      print(f"Olá, {name}")
+## 📌 O que é um Banco de Dados?
+- Um **banco de dados** é uma coleção organizada de dados que pode ser acessada, gerenciada e atualizada de forma eficiente.
+- É utilizado para **armazenar informações de forma estruturada**, garantindo persistência e integridade.
+- Pode ser acessado por sistemas, aplicações ou usuários através de linguagens de consulta como **SQL**.
 
-  def executar(funcao):
-      funcao("Erick")
+---
 
-  executar(do_something)
-  ```
+## 🧮 Banco de Dados Relacional (RDBMS)
 
-## Funções internas (Inner Functions)
-- É possível definir funções dentro de outras funções.
-- Isso permite encapsular lógicas que só fazem sentido localmente.
-- Exemplo:
-  ```python
-  def pai():
-      print("oi")
+### ✅ Características:
+- Organiza os dados em **tabelas** com **linhas e colunas**.
+- Cada tabela possui um **esquema fixo** (estrutura definida).
+- Usa **chaves primárias e estrangeiras** para relacionar dados entre tabelas.
+- Baseado em **lógica relacional** e consulta via **SQL (Structured Query Language)**.
 
-      def filho():
-          return "tchau"
+### 📚 Exemplos:
+- MySQL
+- PostgreSQL
+- Oracle
+- Microsoft SQL Server
 
-      return filho()
+### ✔️ Vantagens:
+- Consistência e integridade dos dados
+- Ideal para sistemas com dados estruturados
+- Suporte a transações (ACID)
 
-  resultado = pai()
-  print(resultado)  # tchau
-  ```
+---
 
-## Decoradores
-- Decoradores adicionam comportamentos antes/depois de uma função ser executada.
-- São úteis para validações, autenticações, logs etc.
-- Exemplo:
-  ```python
-  def meu_decorador(func):
-      def wrapper():
-          print("Antes da função")
-          func()
-          print("Depois da função")
-      return wrapper
+## ⚖️ Formas Normais (Normalização)
 
-  @meu_decorador
-  def saudacao():
-      print("Olá mundo")
+### 📌 O que é?
+- **Normalização** é o processo de organizar os dados em um banco de dados para evitar **redundâncias** e garantir **consistência**.
+- Divide grandes tabelas em tabelas menores, com **relacionamentos bem definidos**.
 
-  saudacao()
-  ```
+### 🔢 Principais Formas Normais:
 
-## Introspecção
-- É a capacidade de examinar objetos em tempo de execução (runtime).
-- Usada para debugging, metaprogramação e validações dinâmicas.
-- Funções úteis:
-  ```python
-  type(obj)
-  dir(obj)
-  hasattr(obj, "atributo")
-  getattr(obj, "atributo", valor_padrao)
-  ```
+#### 1️⃣ Primeira Forma Normal (1FN)
+- Elimina **grupos repetitivos**
+- Cada campo deve conter **um único valor atômico**
 
-## Iteradores
-- São objetos que implementam os métodos `__iter__()` e `__next__()`.
-- Permitem percorrer itens um a um.
-- Usados em loops `for`, `in`, etc.
-- Exemplo:
-  ```python
-  class Contador:
-      def __init__(self, limite):
-          self.limite = limite
+#### 2️⃣ Segunda Forma Normal (2FN)
+- Estar em 1FN **e** todos os atributos **dependem totalmente da chave primária**
 
-      def __iter__(self):
-          self.atual = 0
-          return self
+#### 3️⃣ Terceira Forma Normal (3FN)
+- Estar em 2FN **e** não possuir **dependências transitivas**
+- Ou seja, nenhum campo deve depender de outro campo que não seja chave primária
 
-      def __next__(self):
-          if self.atual < self.limite:
-              self.atual += 1
-              return self.atual
-          raise StopIteration
-  ```
+---
 
-## Geradores
-- Geradores são um tipo especial de iterador criado com funções que usam `yield`.
-- Economizam memória: produzem valores sob demanda.
-- Exemplo:
-  ```python
-  def contador_pares(maximo):
-      n = 0
-      while n <= maximo:
-          yield n
-          n += 2
-  ```
+## 🔧 SQL - Comandos Básicos
 
-### Características dos Geradores
-- Estado interno mantido entre chamadas.
-- Interrompe em `yield` e continua da próxima vez.
-- Depois de iterado, não pode ser reiniciado.
+### 📌 Criar um banco de dados:
+```sql
+CREATE DATABASE nome_do_banco;
+```
 
-### Quando usar:
+### 📌 Selecionar banco de dados:
+```sql
+USE nome_do_banco;
+```
 
-| Situação                | Usar           | Vantagem                   |
-|-------------------------|----------------|----------------------------|
-| Fluxo simples           | Geradores      | Menor uso de memória       |
-| Lógica mais complexa    | Iteradores     | Maior controle do processo |
+### 📌 Criar tabela:
+```sql
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    email VARCHAR(100)
+);
+```
 
+### 📌 Inserir dados:
+```sql
+INSERT INTO usuarios (nome, email)
+VALUES ('Maria', 'maria@email.com');
+```
 
-## 🧾 Manipulação de Arquivos
-### Por que manipular arquivos?
-- Para salvar dados de forma persistente (além da execução do programa).
+### 📌 Consultar dados:
+```sql
+SELECT * FROM usuarios;
+```
 
-## Erros comuns:
-- `FileNotFoundError`: arquivo não encontrado.
-- `PermissionError`: falta de permissão de acesso.
-- `IOError`: erro de entrada/saída (como disco cheio).
-- `UnicodeDecodeError`: erro ao tentar ler arquivo com codificação incorreta.
-- `UnicodeEncodeError`: erro ao tentar escrever conteúdo mal codificado.
+---
 
-## 📦 Pacotes em Python
+## 🗂️ Banco de Dados Não Relacional (NoSQL)
 
-### O que são pacotes?
-- Conjuntos de módulos organizados em diretórios com um arquivo `__init__.py`.
-- Permitem reutilizar e compartilhar código.
+### ✅ Características:
+- Flexível: **sem esquema fixo**
+- Usado para dados sem estrutura definida ou que muda frequentemente
+- Quatro principais tipos:
+  - 🔸 **Documentos** (ex: MongoDB)
+  - 🔹 **Chave-valor** (ex: Redis)
+  - 🔸 **Colunar** (ex: Cassandra)
+  - 🔹 **Grafos** (ex: Neo4j)
 
-## Pip - Gerenciador de Pacotes
-- Instala, atualiza e remove pacotes Python.
-- Comandos principais:
-  ```bash
-  pip install nome_do_pacote
-  pip uninstall nome_do_pacote
-  pip list
-  pip install --upgrade nome_do_pacote
-  ```
+### 📚 Exemplos:
+- MongoDB
+- Redis
+- Cassandra
+- DynamoDB
 
-## Criando ambiente virtual
-- Para isolar dependências por projeto:
-  ```bash
-  python3 -m venv myenv
-  source myenv/bin/activate  # Linux/Mac
-  myenv\Scripts\activate     # Windows
-  ```
+### ✔️ Vantagens:
+- Alta escalabilidade horizontal
+- Performance com grandes volumes de dados
+- Ótimo para aplicações em tempo real e Big Data
 
+---
+
+## 🔧 MongoDB com Python (usando pymongo)
+
+### 📌 Instalação do driver:
+```bash
+pip install pymongo
+```
+
+### 📌 Conectar ao banco:
+```python
+from pymongo import MongoClient
+
+cliente = MongoClient("mongodb://localhost:27017/")
+db = cliente["nomeDoBanco"]
+```
+
+### 📌 Inserir documento:
+```python
+db.usuarios.insert_one({"nome": "Maria", "email": "maria@email.com"})
+```
+
+### 📌 Consultar documentos:
+```python
+for usuario in db.usuarios.find():
+    print(usuario)
+```
+
+### 📌 Atualizar documento:
+```python
+db.usuarios.update_one(
+    {"nome": "Maria"},
+    {"$set": {"email": "novo@email.com"}}
+)
+```
+
+### 📌 Remover documento:
+```python
+db.usuarios.delete_one({"nome": "Maria"})
+```
+
+---
+
+## 🔍 Comparativo: Relacional vs Não Relacional
+
+| Critério                | Relacional (SQL)              | Não Relacional (NoSQL)          |
+|-------------------------|-------------------------------|----------------------------------|
+| Estrutura               | Tabelas e colunas             | Documentos, grafos, chave-valor |
+| Esquema                 | Rígido (pré-definido)         | Flexível                        |
+| Linguagem               | SQL                           | Varia (JSON, consultas nativas) |
+| Transações              | Suporte completo (ACID)       | Suporte limitado ou eventual    |
+| Escalabilidade          | Vertical (mais poder à máquina)| Horizontal (mais máquinas)      |
+| Ideal para              | Dados estruturados            | Dados semi ou não estruturados  |
+
+---
+
+## 💡 Quando Usar Qual?
+
+- **Banco Relacional:**
+  - Aplicações com dados estruturados e necessidade de integridade
+  - ERP, sistemas bancários, gestão de estoque
+
+- **Banco Não Relacional:**
+  - Aplicações com dados variados e alta escalabilidade
+  - Redes sociais, apps de mensagens, análise de logs, IoT
