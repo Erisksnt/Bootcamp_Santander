@@ -109,11 +109,9 @@
 | Fluxo simples           | Geradores      | Menor uso de memória       |
 | Lógica mais complexa    | Iteradores     | Maior controle do processo |
 
----
 
-# 🧾 Manipulação de Arquivos
-
-## Por que manipular arquivos?
+## 🧾 Manipulação de Arquivos
+### Por que manipular arquivos?
 - Para salvar dados de forma persistente (além da execução do programa).
 
 ## Erros comuns:
@@ -123,11 +121,9 @@
 - `UnicodeDecodeError`: erro ao tentar ler arquivo com codificação incorreta.
 - `UnicodeEncodeError`: erro ao tentar escrever conteúdo mal codificado.
 
----
+## 📦 Pacotes em Python
 
-# 📦 Pacotes em Python
-
-## O que são pacotes?
+### O que são pacotes?
 - Conjuntos de módulos organizados em diretórios com um arquivo `__init__.py`.
 - Permitem reutilizar e compartilhar código.
 
