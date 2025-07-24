@@ -1,0 +1,2 @@
+run:
+	@uvicorn Aula_08.workout_api.main:app --reload
