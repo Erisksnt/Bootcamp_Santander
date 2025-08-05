@@ -1,6 +1,8 @@
 import datetime
 from pydantic import PositiveFloat
 from sqlalchemy import DateTime, ForeignKey, Integer, String
+from Aula_08.categorias.models import CategoriaModel
+from Aula_08.centro_treinamento.models import CentroTreinamentoModel
 from Aula_08.contrib.models import BaseModel
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
