@@ -6,9 +6,9 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-#from workout_api.contrib.models import BaseModel
-#from workout_api.contrib.repository.models import *
 
+from Aula_08.contrib.models import BaseModel
+from Aula_08.contrib.repository.models import *
 
 config = context.config
 
@@ -16,8 +16,6 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 target_metadata = BaseModel.metadata
-
-
 
 def run_migrations_offline() -> None:
    
