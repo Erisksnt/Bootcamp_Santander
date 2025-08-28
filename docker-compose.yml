@@ -8,3 +8,8 @@ services:
       POSTGRES_DB: workout
     ports:
       - "5432:5432"
+
+  db_mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
